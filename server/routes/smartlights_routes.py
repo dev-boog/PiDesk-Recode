@@ -51,14 +51,24 @@ def smartlights_on():
     device_name = request.args.get("device")
     
     output = SmartLightController.run("on", device_name=device_name)
-    return render_template('smart_lights.html', smartlights=json.load(open("./config.json"))["smartlights"])
+    
+    redirection = request.args.get("redirection")
+    if redirection is None:
+        return render_template('smart_lights.html', smartlights=json.load(open("./config.json"))["smartlights"])
+    else:
+        return render_template(redirection)
 
 @smartlight_routes.route('/smartlights/off')
 def smartlights_off():
     device_name = request.args.get("device")
     
     output = SmartLightController.run("off", device_name=device_name)
-    return render_template('smart_lights.html', smartlights=json.load(open("./config.json"))["smartlights"])
+    
+    redirection = request.args.get("redirection")
+    if redirection is None:
+        return render_template('smart_lights.html', smartlights=json.load(open("./config.json"))["smartlights"])
+    else:
+        return render_template(redirection)
 
 @smartlight_routes.route('/smartlights/change_color')
 def change_color():

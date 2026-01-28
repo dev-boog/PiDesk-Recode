@@ -51,6 +51,20 @@
                 <h1 class="text-white font-semibold text-[29px]">Loading...</h1>
             </div>
 
+            <!-- Smartlights -->
+            <div class="bg-neutral-900 border border-neutral-700 rounded p-4">
+                <p class="text-neutral-500 font-semibold text-[12px]">Smart Lights Desk LED Strip</p>
+                <div class="flex space-x-2 mt-1">
+                    <input type="color" name="color" value="#ff8800" class="w-10 h-10 rounded" hx-get="{{ url_for('smartlights.change_color', device='Desk LED Strip') }}" hx-trigger="input changed delay:300ms" hx-swap="none">
+                    <a href="{{ url_for('smartlights.smartlights_on', device='Desk LED Strip', redirection='home.html') }}" class="bg-neutral-700 px-3 py-2 rounded-md border border-neutral-500 text-white text-sm touch-manipulation select-none">
+                        <i class="bi bi-lightbulb-fill pointer-events-none"></i>
+                    </a> 
+                    <a href="{{ url_for('smartlights.smartlights_off', device='Desk LED Strip', redirection='home.html') }}" class="bg-neutral-700 px-3 py-2 rounded-md border border-neutral-500 text-white text-sm touch-manipulation select-none">
+                        <i class="bi bi-lightbulb-off-fill pointer-events-none"></i>
+                    </a>
+                </div>
+            </div>
+
             <!-- Location -->
             <div id="weather-loc" class="bg-neutral-900 border border-neutral-700 rounded p-4"
                 hx-get="/home/update_weather_location" hx-trigger="load, every 1800s" hx-swap="innerHTML">
