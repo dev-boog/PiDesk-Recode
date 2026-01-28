@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiDesk | Home</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/theme.css">
+</head>
+<body>
+    <nav id="navigation" class="w-full p-3 bg-neutral-900 flex border-b border-b-neutral-700 justify-left gap-2">
+        <a href="{{ url_for('index') }}" class="bg-neutral-700 px-4 py-3 rounded-md border border-neutral-500 text-white text-sm">
+            <i class="bi bi-house-fill"></i>
+        </a> 
+        <a href="{{ url_for('spotify.spotify') }}" class="px-4 py-3 rounded-md text-white text-sm">
+            <i class="bi bi-music-note-beamed"></i>
+        </a>    
+        <a href="{{ url_for('computer.computer') }}" class="px-4 py-3 rounded-md text-white text-sm">
+            <i class="bi bi-pc-display"></i>
+        </a>  
+        <a href="{{ url_for('smartlights.smartlights') }}" class="px-4 py-3 rounded-md text-white text-sm">
+            <i class="bi bi-lightbulb-fill"></i>
+        </a>  
+    </nav>
+
+    <section class="flex-1 relative p-3 overflow-auto">
+        <div class="grid grid-cols-3 grid-rows-2 gap-2">
+            <!-- Clock -->
+            <div class="bg-neutral-900 border border-neutral-700 rounded p-4 row-span-2">
+                <p class="text-neutral-500 font-semibold text-[12px]">Clock</p>
+                <h1 class="text-white font-semibold text-[29px] text-center mt-7" id="clock-time">18:02:32</h1>
+                <h1 class="text-white text-[18px] mb-2 text-center" id="clock-date">Wednesday, 28 January, 2026</h1>
+            </div>
+
+            <!-- Temperature -->
+            <div id="weather-temp" class="bg-neutral-900 border border-neutral-700 rounded p-4"
+                hx-get="/home/update_weather_temp" hx-trigger="load, every 1800s" hx-swap="innerHTML">
+                <p class="text-neutral-500 font-semibold text-[12px]">Temperature</p>
+                <h1 class="text-white font-semibold text-[29px]">Loading...</h1>
+            </div>
+
+            <!-- Condition -->
+            <div id="weather-cond" class="bg-neutral-900 border border-neutral-700 rounded p-4"
+                hx-get="/home/update_weather_condition" hx-trigger="load, every 1800s" hx-swap="innerHTML">
+                <p class="text-neutral-500 font-semibold text-[12px]">Condition</p>
+                <h1 class="text-white font-semibold text-[29px]">Loading...</h1>
+            </div>
+
+            <!-- Location -->
+            <div id="weather-loc" class="bg-neutral-900 border border-neutral-700 rounded p-4"
+                hx-get="/home/update_weather_location" hx-trigger="load, every 1800s" hx-swap="innerHTML">
+                <p class="text-neutral-500 font-semibold text-[12px]">Location</p>
+                <h1 class="text-white font-semibold text-[29px]">Loading...</h1>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='clock.js') }}"></script>      
+</body>
+</html>
