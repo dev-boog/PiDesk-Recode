@@ -32,9 +32,11 @@ class SmartLightController:
 def check_config():
     with open("./config.json", "r") as f:
         config = json.load(f)
-    for key, value in config.get("smartlights", {}).items():
-        if not value:
-            print(f"{key} is blank! Requests may fail.")
+
+    for device_name, device in config.get("smartlights", {}).items():
+        for field, value in device.items():
+            if value in ("", None):
+                return render_template("error.html", error_title="Required Field Missing!", error_description=f"You're missing the required field for {field}! Please edit the config.json to resolve this error.", redirect="index")
 
 @smartlight_routes.route('/smartlights')
 def smartlights():

@@ -28,25 +28,31 @@
     </nav>
     
     <section class="p-5">
-        {% for name, device in smartlights.items() %}
-            <div class="mb-5 p-3 bg-neutral-900 border border-neutral-700 rounded flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <input type="color" name="color" id="colorPicker-{{ name }}" value="#ff8800" class="w-10 h-10 rounded" hx-get="{{ url_for('smartlights.change_color', device=name) }}" hx-trigger="input changed delay:300ms" hx-swap="none">
-                    <div>
-                        <h1 class="text-white font-semibold">{{ name }}</h1>
-                        <p class="text-neutral-500 font-semibold text-[12px]">{{ device.ip }}</p>
+        {% if smartlights %}
+            {% for name, device in smartlights.items() %}
+                <div class="mb-5 p-3 bg-neutral-900 border border-neutral-700 rounded flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <input type="color" name="color" id="colorPicker-{{ name }}" value="#ff8800" class="w-10 h-10 rounded" hx-get="{{ url_for('smartlights.change_color', device=name) }}" hx-trigger="input changed delay:300ms" hx-swap="none">
+                        <div>
+                            <h1 class="text-white font-semibold">{{ name }}</h1>
+                            <p class="text-neutral-500 font-semibold text-[12px]">{{ device.ip }}</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <a href="{{ url_for('smartlights.smartlights_on', device=name) }}" class="bg-neutral-700 px-3 py-2 rounded-md border border-neutral-500 text-white text-sm touch-manipulation select-none">
+                            <i class="bi bi-lightbulb-fill pointer-events-none"></i>
+                        </a> 
+                        <a href="{{ url_for('smartlights.smartlights_off', device=name) }}" class="bg-neutral-700 px-3 py-2 rounded-md border border-neutral-500 text-white text-sm touch-manipulation select-none">
+                            <i class="bi bi-lightbulb-off-fill pointer-events-none"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="flex space-x-2">
-                    <a href="{{ url_for('smartlights.smartlights_on', device=name) }}" class="bg-neutral-700 px-3 py-2 rounded-md border border-neutral-500 text-white text-sm touch-manipulation select-none">
-                        <i class="bi bi-lightbulb-fill pointer-events-none"></i>
-                    </a> 
-                    <a href="{{ url_for('smartlights.smartlights_off', device=name) }}" class="bg-neutral-700 px-3 py-2 rounded-md border border-neutral-500 text-white text-sm touch-manipulation select-none">
-                        <i class="bi bi-lightbulb-off-fill pointer-events-none"></i>
-                    </a>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <div class="mb-5 p-3 bg-neutral-900 border border-neutral-700 rounded flex items-center justify-center">
+                <h1 class="text-white font-semibold">You have not added any Smartlights. To add smartlights, view the config.</h1>
+            </div> 
+        {% endif %}
     </section>
 </body>
 </html>

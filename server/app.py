@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+
+from .routes.error_routes import error_routes
 from .routes.spotify_routes import spotify_routes
 from .routes.smartlights_routes import smartlight_routes
 from .routes.computer_routes import computer_routes
@@ -8,12 +10,12 @@ import json
 
 app = Flask(__name__)
 
+app.register_blueprint(error_routes)
 app.register_blueprint(spotify_routes)
 app.register_blueprint(smartlight_routes)
 app.register_blueprint(computer_routes)
 
 def get_weather_data():
-    """Helper to fetch weather data once and return dict"""
     try:
         with open("./config.json", "r", encoding="utf-8") as f:
             config = json.load(f)
