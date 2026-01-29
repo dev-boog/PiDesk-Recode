@@ -4,6 +4,7 @@ from .routes.error_routes import error_routes
 from .routes.spotify_routes import spotify_routes
 from .routes.smartlights_routes import smartlight_routes
 from .routes.computer_routes import computer_routes
+from .routes.discord_routes import discord_routes
 
 import requests
 import json
@@ -14,6 +15,8 @@ app.register_blueprint(error_routes)
 app.register_blueprint(spotify_routes)
 app.register_blueprint(smartlight_routes)
 app.register_blueprint(computer_routes)
+app.register_blueprint(discord_routes)
+
 
 def get_weather_data():
     try:

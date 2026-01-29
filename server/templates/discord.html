@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiDesk | Home</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/theme.css">
+</head>
+<body>
+    <nav id="navigation" class="w-full p-3 bg-neutral-900 flex border-b border-b-neutral-700 justify-left gap-2">
+        <a id="navigation-home-btn" href="{{ url_for('index') }}" class="px-4 py-3 rounded-md  text-white text-sm touch-manipulation select-none">
+            <i class="bi bi-house-fill pointer-events-none"></i>
+        </a> 
+        <a id="navigation-spotify-btn" href="{{ url_for('spotify.spotify') }}" class="px-4 py-3 rounded-md  text-white text-sm touch-manipulation select-none">
+            <i class="bi bi-music-note-beamed pointer-events-none"></i>
+        </a>   
+        <a id="navigation-computer-btn" href="{{ url_for('computer.computer') }}" class="px-4 py-3 rounded-md  text-white text-sm touch-manipulation select-none">
+            <i class="bi bi-pc-display pointer-events-none"></i>
+        </a>      
+        <a id="navigation-spotify-btn" href="{{ url_for('smartlights.smartlights') }}" class="px-4 py-3 rounded-md  text-white text-sm touch-manipulation select-none">
+            <i class="bi bi-lightbulb-fill pointer-events-none"></i>
+        </a>    
+        <a id="navigation-spotify-btn" href="{{ url_for('smartlights.smartlights') }}" class="bg-neutral-700 px-4 py-3 rounded-md border border-neutral-500 text-white text-sm touch-manipulation select-none">
+            <i class="bi bi-discord pointer-events-none"></i>
+        </a> 
+    </nav>
+    <section class="p-5">
+        <div id="user-info" hx-get="{{ url_for('discord.get_user_data') }}" hx-swap="innerHTML" hx-trigger="every 3s">
+            <div class="p-5 bg-neutral-900 border border-neutral-700 rounded mb-3"> 
+                <h1 class="text-white font-semibold text-[23px]">Logging in...</h1>
+                <p class="text-neutral-500 font-semibold text-[14px]">
+                    We are trying to log in with the token you provided.
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
