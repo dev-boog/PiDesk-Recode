@@ -83,7 +83,7 @@ def get_user_data():
         </div>
         '''
     else:
-        html = '''
+        html = f'''
         <div class="p-5 bg-neutral-900 border border-neutral-700 rounded flex space-x-5 items-center"> 
             <img src="{user_data.get('avatar')}" alt="Avatar" class="w-16 h-16 rounded-full">
             <div>
